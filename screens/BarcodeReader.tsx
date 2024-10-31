@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Modal, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Button, Modal, FlatList, TouchableOpacity, ToastAndroid } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { productInfo, productData } from '../data';
 
@@ -7,6 +7,16 @@ const BarcodeReader = ({navigation}) => {
   // 바코드를 찾았을 때의 정보를 저장할 state
   const [productInfo, setProductInfo] = React.useState<productInfo | null>(null);
   const [modalVisible, setModalVisible] = React.useState(false);
+  const [lastToastTime, setLastToastTime] = React.useState(0);
+  const cooldown = 5000;
+
+  const showToast = () => {
+    const now  = Date.now();
+    if (now - lastToastTime >= cooldown) {
+      ToastAndroid.show('해당 제품의 정보가 없습니다', ToastAndroid.SHORT);
+      setLastToastTime(now);
+    }
+  }
 
   // 바코드를 찾았을 때의 정보를 저장할 함수
   const handleBarCodeRead = (barcode : string) => {
@@ -16,6 +26,7 @@ const BarcodeReader = ({navigation}) => {
       navigation.navigate('결과창', { productInfo: productData[barcode] });
     } else {
       setProductInfo(null);
+      showToast();
     }
   };
 
