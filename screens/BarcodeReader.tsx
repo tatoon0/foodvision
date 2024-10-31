@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Modal, FlatList, TouchableOpacity } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { productInfo, productData } from '../data';
 
 const BarcodeReader = ({navigation}) => {
   // 바코드를 찾았을 때의 정보를 저장할 state
   const [productInfo, setProductInfo] = React.useState<productInfo | null>(null);
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   // 바코드를 찾았을 때의 정보를 저장할 함수
   const handleBarCodeRead = (barcode : string) => {
@@ -39,29 +40,46 @@ const BarcodeReader = ({navigation}) => {
         }}>
         {/* 테스트1 */}
         <Button
-          title="test1"
+          title="test"
           onPress={() => {
-            handleBarCodeRead('8809111699897');
-            console.log(productInfo); 
-          }}
-        />
-        {/* 테스트2 */}
-        <Button
-          title="test2"
-          onPress={() => {
-            handleBarCodeRead('8801043014809');
-            console.log(productInfo); 
-          }}
-        />
-        {/* 테스트2 */}
-        <Button
-          title="test3"
-          onPress={() => {
-            handleBarCodeRead('8801047111849');
-            console.log(productInfo); 
+            setModalVisible(true);
           }}
         />
       </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
+      >
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{ backgroundColor: 'white', padding: 20, height: '50%' }}>
+            <FlatList
+              data={Object.keys(productData)}
+              keyExtractor={(item) => item}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={{ padding: 10 }}
+                  onPress={() => {
+                    setModalVisible(false);
+                    handleBarCodeRead(item);
+                }}>
+                  <Text style={styles.text}>{item}</Text>
+                </TouchableOpacity>
+              )}
+            >
+            </FlatList>
+            <Button
+              title="닫기"
+              onPress={() => {
+                setModalVisible(false);
+              }}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -71,6 +89,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  text: {
+    color: 'black',
+    fontSize: 16,
+},
 });
 
 export default BarcodeReader;
