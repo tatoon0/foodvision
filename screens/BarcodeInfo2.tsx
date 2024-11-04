@@ -14,6 +14,8 @@ const BarcodeInfo1 = ({route, navigation}) => {
             <Text style={styles.text}>조리주의사항 : {info.cookingcaution}</Text> : null}
             {info.features ?
             <Text style={styles.text}>제품특징 : {info.features}</Text> : null}
+            {info.abv ? 
+            <Text style={styles.text}>알콜도수 : {info.abv}</Text> : null}
         </View>
     );
 };

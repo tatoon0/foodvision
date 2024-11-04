@@ -7,13 +7,14 @@ export interface productInfo {
         manufacturer: string,
         distributor: string,
     },
-    // 상세정보 : 포장단위, 제품용량, 조리방법, 조리 시 주의사항, 제품특징
+    // 상세정보 : 포장단위, 제품용량, 조리방법, 조리 시 주의사항, 제품특징, 알콜도수
     detailedInfo: {
         packagingUnit: string,
         capacity: string,
         cookingInstructions?: string,
         cookingcaution?: string,
         features?: string,
+        abv? : string,
     },
     // 영양정보 : 원재료, 영양성분, 알레르기, 제조시설알레르기
     nutritionInfo: {
@@ -177,6 +178,7 @@ export const productData: { [barcode: string]: productInfo } = {
     detailedInfo: {
         packagingUnit: "단일",
         capacity: "355ml",
+        abv: "4.5%",
     },
     nutritionInfo: {
         ingredients: "정제수, 전분(외국산(러시아, 헝가리, 세르비아 등)), 보리(호주산), 맥아(외국산(독일, 호주, 덴마크 등)), 효모추출물, 호프펠렛, 이산화탄소, 효소제 7종, 산도조절제 2종, 비타민C, 영양강화제",
