@@ -7,7 +7,8 @@ const BarcodeInfo1 = ({route, navigation}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>원재료 : {info.ingredients}</Text>
-            <Text style={styles.text}>영양성분 : {info.nutritionalContent}</Text>
+            {info.origin ?
+            <Text style={styles.text}>영양성분 : {info.nutritionalContent}</Text> : null}
             {info.allergens ?
             <Text style={styles.text}>알레르기 : {info.allergens}</Text> : null}
             <Text style={styles.text}>제조시설알레르기 : {info.manufacturingAllergens}</Text>
@@ -24,7 +25,8 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 20,
+        margin: 5,
     },
 });
 
