@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { translations } from '../translation'; 
 
 const BarcodeInfo1 = ({route, navigation}) => {
     const { info } = route.params;
+
+    useEffect(() => {
+        navigation.setOptions({title: route.params.title});
+    }, []);
+
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>제품명 : {info.name}</Text>
-            <Text style={styles.text}>상품분류명 : {info.category}</Text>
-            <Text style={styles.text}>식품유형 : {info.type}</Text>
-            <Text style={styles.text}>유통사 : {info.distributor}</Text>
-            <Text style={styles.text}>제조사 : {info.manufacturer}</Text>
+            {Object.entries(info).map(([key, value]) => (
+                <Text key={key} style={styles.text}>{translations[key]} : {String(value)}</Text>
+            ))}
         </View>
     );
 };

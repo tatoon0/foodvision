@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 
 const Home = ({navigation}) => {
@@ -20,6 +20,13 @@ const Home = ({navigation}) => {
                 navigation.navigate('바코드 리더')
             }}>
                 <Text style={styles.text}>Barcode</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+                navigation.navigate('설정')
+            }}>
+                <Text style={styles.text}>Setting</Text>
             </TouchableOpacity>
         </View>
     );
