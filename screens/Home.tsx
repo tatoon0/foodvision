@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import CustomBlock from '../components/CustomBlock'; // CustomBlock 경로에 맞게 수정
-
+import OCRResultScreen from './OCRResultScreen';
 const Home = ({ navigation }) => {
     return (
         <View style={styles.container}>
