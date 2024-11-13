@@ -1,29 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import CustomBlock from '../components/CustomBlock';
+import { View, StyleSheet } from 'react-native';
+import CustomBlock from '../components/CustomBlock'; // CustomBlock 경로에 맞게 수정
 
-
-const Home = ({ navigation }) => {
+const OCRModeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.buttonContainer}>
                 <CustomBlock
-                    title="Barcode"
+                    title="스캔하기"
                     onPress={() => {
-                        navigation.navigate('BarcodeReader');
+                        navigation.navigate('OcrScreen');
                     }}
                 />
             </View>
             <View style={styles.buttonContainer}>
                 <CustomBlock
-                    title="OCR"
-                    onPress={() => navigation.navigate('OCRModeScreen')}
-                />
-            </View>
-            <View style={styles.buttonContainer}>
-                <CustomBlock
-                    title="마이페이지"
-                    onPress={() => navigation.navigate('MyPage')}
+                    title="데이터베이스"
+                    onPress={() => navigation.navigate('OcrScreen')}
                 />
             </View>
         </View>
@@ -43,4 +36,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default OCRModeScreen;

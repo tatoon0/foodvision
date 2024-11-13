@@ -23,7 +23,7 @@ const BarcodeReader = ({navigation}) => {
     // 바코드가 productData에 있으면 해당 바코드의 정보를 productInfo에 저장하고 BarcodeResult로 이동
     if (productData[barcode]) {
       setProductInfo(productData[barcode]);
-      navigation.navigate('결과창', { productInfo: productData[barcode] });
+      navigation.navigate('BarcodeResult', { productInfo: productData[barcode] });
     } else {
       setProductInfo(null);
       showToast();

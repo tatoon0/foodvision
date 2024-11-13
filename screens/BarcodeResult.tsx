@@ -59,24 +59,24 @@ const BarcodeResult = ({route, navigation}) => {
             <View style={styles.rowButtonContainer}>
                 <TouchableOpacity 
                 style={styles.buttonContainer}
-                onPress={() => {navInfo('정보', basicInfo, "기본정보")}}>
+                onPress={() => {navInfo('BarcodeInfo', basicInfo, "기본정보")}}>
                     <Text style={styles.text}>기본정보</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 style={styles.buttonContainer}
-                onPress={() => {navInfo('정보', detailedInfo, "상세정보")}}>
+                onPress={() => {navInfo('BarcodeInfo', detailedInfo, "상세정보")}}>
                     <Text style={styles.text}>상세정보</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.rowButtonContainer}>
             <TouchableOpacity 
                 style={styles.buttonContainer}
-                onPress={() => {navInfo('정보', nutritionInfo, "영양정보")}}>
+                onPress={() => {navInfo('BarcodeInfo', nutritionInfo, "영양정보")}}>
                     <Text style={styles.text}>영양정보</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 style={styles.buttonContainer}
-                onPress={() => {navInfo('정보', additionalInfo, "기타정보")}}>
+                onPress={() => {navInfo('BarcodeInfo', additionalInfo, "기타정보")}}>
                     <Text style={styles.text}>기타정보</Text>
                 </TouchableOpacity>
             </View>

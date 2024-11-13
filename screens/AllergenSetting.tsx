@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, Switch } from "react-native";
+import { Text, StyleSheet, View, Switch, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MyAllergen from "../MyAllergen";
 
-const Setting = ({ route, navigation }) => {
+const AllergenSetting = ({ route, navigation }) => {
     const [allergens, setAllergens] = useState(MyAllergen);
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const Setting = ({ route, navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             {Object.entries(allergens).map(([allergen, isChecked]) => (
                 <View key={allergen} style={styles.allergenItem}>
                     <Text style={styles.allergenText}>{allergen}</Text>
@@ -53,7 +53,7 @@ const Setting = ({ route, navigation }) => {
                     />
                 </View>
             ))}
-        </View>
+        </ScrollView>
     );
 };
 
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        marginBottom: 10,
+        marginBottom: 20,
     },
     allergenText: {
         fontSize: 18,
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Setting;
+export default AllergenSetting;

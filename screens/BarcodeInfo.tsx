@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { translations } from '../translation'; 
 
-const BarcodeInfo1 = ({route, navigation}) => {
+const BarcodeInfo = ({route, navigation}) => {
     const { info } = route.params;
 
     useEffect(() => {
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BarcodeInfo1;
+export default BarcodeInfo;
