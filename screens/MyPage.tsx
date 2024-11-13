@@ -6,7 +6,7 @@ const MyPage: React.FC = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <CustomBlock title="즐겨찾기" onPress={() => alert('즐겨찾기 보기')} />
+        <CustomBlock title="즐겨찾기"  onPress={() => navigation.navigate('FavoritesScreen')} />
         <CustomBlock title="알레르기" onPress={() => navigation.navigate("AllergenSetting")}  />
       </View>
       <View style={styles.row}>
