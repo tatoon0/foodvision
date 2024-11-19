@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, Switch, ScrollView } from "react-native";
+import { Text, StyleSheet, View, Switch, ScrollView, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MyAllergen from "../MyAllergen";
+import CustomBlock from "../components/CustomBlock";
 
 const AllergenSetting = ({ route, navigation }) => {
     const [allergens, setAllergens] = useState(MyAllergen);
@@ -43,17 +44,15 @@ const AllergenSetting = ({ route, navigation }) => {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             {Object.entries(allergens).map(([allergen, isChecked]) => (
-                <View key={allergen} style={styles.allergenItem}>
-                    <Text style={styles.allergenText}>{allergen}</Text>
-                    <Switch
-                        value={isChecked}
-                        onValueChange={() => toggleAllergen(allergen)}
-                    />
-                </View>
+                <CustomBlock
+                    key={allergen}
+                    title={`${allergen} 알림 ${isChecked ? "끄기" : "켜기"}`}
+                    onPress={() => toggleAllergen(allergen)}
+                />
             ))}
-        </ScrollView>
+        </View>
     );
 };
 
@@ -61,17 +60,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: "#fff",
+        backgroundColor: "#f5f5f5",
     },
     allergenItem: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        marginBottom: 20,
     },
     allergenText: {
         fontSize: 18,
         color: "black",
+        padding: 10,
     },
 });
 

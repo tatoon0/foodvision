@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-evenly',
-    padding: 20,
+    padding: 5,
   },
   textContainer: {
     flexGrow: 1,

@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const CustomBlock = ({ title, onPress }) => {
+const CustomBlock = ({ title, onPress, hint }) => {
     return (
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <TouchableOpacity accessibilityHint={hint} style={styles.button} onPress={onPress}>
             <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>
     );
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical: 10, // 버튼 간의 간격
+        margin: 5, // 버튼 간의 간격
     },
     text: {
         color: '#000',

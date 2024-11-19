@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import CustomBlock from '../components/CustomBlock';
 
 
@@ -8,6 +8,7 @@ const Home = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.buttonContainer}>
                 <CustomBlock
+                    hint={"3개 중 첫번째 항목. 바코드를 인식하여 제품 정보를 확인합니다."}
                     title="Barcode"
                     onPress={() => {
                         navigation.navigate('BarcodeReader');
@@ -16,12 +17,14 @@ const Home = ({ navigation }) => {
             </View>
             <View style={styles.buttonContainer}>
                 <CustomBlock
+                    hint={"3개 중 두번째 항목. 사진을 찍어 텍스트를 추출합니다."}
                     title="OCR"
                     onPress={() => navigation.navigate('OCRModeScreen')}
                 />
             </View>
             <View style={styles.buttonContainer}>
                 <CustomBlock
+                    hint={"3개 중 세번째 항목."}
                     title="마이페이지"
                     onPress={() => navigation.navigate('MyPage')}
                 />
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'space-evenly', // 위아래로 균등한 간격
-        padding: 20,
+        padding: 5,
         backgroundColor:"#F5F5F5"
     },
     buttonContainer: {

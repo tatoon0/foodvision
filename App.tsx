@@ -36,7 +36,7 @@ const App = () => {
         screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home}/>
           <Stack.Screen name="BarcodeReader" component={BarcodeReader}/>
-          <Stack.Screen name="BarcodeResult" component={BarcodeResult} />
+          <Stack.Screen name="BarcodeResult" component={BarcodeResult}/>
           <Stack.Screen name="BarcodeInfo" component={BarcodeInfo} />
           <Stack.Screen name="OCRModeScreen" component={OCRModeScreen} />
           <Stack.Screen name="OcrScreen" component={OcrScreen} />

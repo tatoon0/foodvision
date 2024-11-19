@@ -6,14 +6,10 @@ import { translations } from '../translation';
 const BarcodeInfo = ({route, navigation}) => {
     const { info } = route.params;
 
-    useEffect(() => {
-        navigation.setOptions({title: route.params.title});
-    }, []);
-
     return (
         <View style={styles.container}>
-            {Object.entries(info).map(([key, value]) => (
-                <Text key={key} style={styles.text}>{translations[key]} : {String(value)}</Text>
+            {Object.entries(info).map(([key, value], index) => (
+                <Text accessibilityLabel={`${route.params.title} ${Object.keys(info).length}개 중 ${index+1}번째, ${translations[key]} : ${String(value)}`} key={key} style={styles.text}>{translations[key]} : {String(value)}</Text>
             ))}
         </View>
     );

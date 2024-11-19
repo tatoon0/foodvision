@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Button, Modal, FlatList, TouchableOpacity, ToastAndroid } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { productInfo, productData } from '../data';
+import { trigger } from 'react-native-haptic-feedback';
+import { useFocusEffect } from '@react-navigation/native';
 
 const BarcodeReader = ({navigation}) => {
   // 바코드를 찾았을 때의 정보를 저장할 state
@@ -9,6 +11,24 @@ const BarcodeReader = ({navigation}) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const [lastToastTime, setLastToastTime] = React.useState(0);
   const cooldown = 5000;
+
+  const options = {
+    ignoreAndroidSystemSettings: true,
+  };
+
+  useEffect(() => {
+    ToastAndroid.show('진동이 울리는 동안 카메라가 활성화됩니다. 카메라에서 30cm정도에 바코드를 맞추면 인식이 원활합니다.', ToastAndroid.SHORT);
+  }, []);
+
+  useFocusEffect(() => {
+    const interval = setInterval(() => {
+      trigger('soft', options);
+      setTimeout(() => {
+        trigger('soft', options);
+      }, 500);
+    }, 2000);
+    return () => clearInterval(interval);
+  });
 
   const showToast = () => {
     const now  = Date.now();

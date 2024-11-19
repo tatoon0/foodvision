@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, ToastAndroid } from 'react-native';
 import { StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MyAllergen from '../MyAllergen';
+import CustomBlock from '../components/CustomBlock';
+import { trigger } from 'react-native-haptic-feedback';
 
 const BarcodeResult = ({route, navigation}) => {
     // 제품 정보를 route.params에서 가져옴
@@ -11,6 +13,8 @@ const BarcodeResult = ({route, navigation}) => {
     const [allergens, setAllergens] = useState(MyAllergen);
 
     useEffect(() => {
+        ToastAndroid.show(`바코드를 인식했습니다. 제품명 : ${basicInfo.name}`, ToastAndroid.SHORT);
+
         // 제품 이름을 타이틀로 설정
         navigation.setOptions({title: basicInfo.name});
 
@@ -57,28 +61,12 @@ const BarcodeResult = ({route, navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.rowButtonContainer}>
-                <TouchableOpacity 
-                style={styles.buttonContainer}
-                onPress={() => {navInfo('BarcodeInfo', basicInfo, "기본정보")}}>
-                    <Text style={styles.text}>기본정보</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                style={styles.buttonContainer}
-                onPress={() => {navInfo('BarcodeInfo', detailedInfo, "상세정보")}}>
-                    <Text style={styles.text}>상세정보</Text>
-                </TouchableOpacity>
+                <CustomBlock hint="4개 중 첫번째 항목" title="기본정보" onPress={() => {navInfo('BarcodeInfo', basicInfo, "기본정보")}} />
+                <CustomBlock hint="4개 중 두번째 항목" title="상세정보" onPress={() => {navInfo('BarcodeInfo', detailedInfo, "상세정보")}} />
             </View>
             <View style={styles.rowButtonContainer}>
-            <TouchableOpacity 
-                style={styles.buttonContainer}
-                onPress={() => {navInfo('BarcodeInfo', nutritionInfo, "영양정보")}}>
-                    <Text style={styles.text}>영양정보</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                style={styles.buttonContainer}
-                onPress={() => {navInfo('BarcodeInfo', additionalInfo, "기타정보")}}>
-                    <Text style={styles.text}>기타정보</Text>
-                </TouchableOpacity>
+                <CustomBlock hint="4개 중 세번째 항목" title="영양정보" onPress={() => {navInfo('BarcodeInfo', nutritionInfo, "영양정보")}} />
+                <CustomBlock hint="4개 중 네번째 항목" title={"기타정보"} onPress={() => {navInfo('BarcodeInfo', additionalInfo, "기타정보")}} />
             </View>
         </View>
     );
@@ -87,9 +75,9 @@ const BarcodeResult = ({route, navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff',
+        justifyContent: 'space-evenly',
+        padding: 5,
+        backgroundColor:"#F5F5F5"
     },
     text: {
         color: 'black',

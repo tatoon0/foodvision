@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-evenly', // 위아래로 균등한 간격
-    padding: 20,
+    padding: 5,
    
   },
   row: {
