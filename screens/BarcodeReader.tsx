@@ -63,13 +63,11 @@ const BarcodeReader = ({navigation}) => {
         type={RNCamera.Constants.Type.back}
         autoFocus={RNCamera.Constants.AutoFocus.on}
       />
-      {/* 테스트용 버튼 */}
       <View style={{
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         paddingVertical: 10,
         }}>
-        {/* 테스트1 */}
         <Button
           title="test"
           onPress={() => {
