@@ -24,7 +24,7 @@ const Home = ({ navigation }) => {
             </View>
             <View style={styles.buttonContainer}>
                 <CustomBlock
-                    hint={"3개 중 세번째 항목."}
+                    hint={"3개 중 세번째 항목. 스캔 기록, 설정 등을 확인합니다."}
                     title="마이페이지"
                     onPress={() => navigation.navigate('MyPage')}
                 />

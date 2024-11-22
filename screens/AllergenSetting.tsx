@@ -45,8 +45,9 @@ const AllergenSetting = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
-            {Object.entries(allergens).map(([allergen, isChecked]) => (
+            {Object.entries(allergens).map(([allergen, isChecked], index) => (
                 <CustomBlock
+                    hint={`${Object.keys(allergens).length}개 성분 중 ${index+1}번째 성분.`}
                     key={allergen}
                     title={`${allergen} 알림 ${isChecked ? "끄기" : "켜기"}`}
                     onPress={() => toggleAllergen(allergen)}

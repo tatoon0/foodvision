@@ -16,10 +16,6 @@ const BarcodeReader = ({navigation}) => {
     ignoreAndroidSystemSettings: true,
   };
 
-  useEffect(() => {
-    ToastAndroid.show('진동이 울리는 동안 카메라가 활성화됩니다. 카메라에서 30cm정도에 바코드를 맞추면 인식이 원활합니다.', ToastAndroid.SHORT);
-  }, []);
-
   useFocusEffect(() => {
     const interval = setInterval(() => {
       trigger('soft', options);
@@ -63,7 +59,10 @@ const BarcodeReader = ({navigation}) => {
         type={RNCamera.Constants.Type.back}
         autoFocus={RNCamera.Constants.AutoFocus.on}
       />
-      <View style={{
+      <View accessible={true} style={{ alignItems:'center' }}>
+        <Text style={{ fontSize:20, color:'black' }}>진동이 울리는 동안 카메라가 활성화됩니다. {'\n'}카메라에서 30cm정도에 바코드를 맞추면 인식이 원활합니다.</Text>
+      </View>
+      {/* <View style={{
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         paddingVertical: 10,
@@ -108,7 +107,7 @@ const BarcodeReader = ({navigation}) => {
             />
           </View>
         </View>
-      </Modal>
+      </Modal> */}
     </View>
   );
 };

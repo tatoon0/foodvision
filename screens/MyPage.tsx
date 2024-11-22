@@ -7,7 +7,7 @@ const MyPage: React.FC = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.row}>
         <CustomBlock title="즐겨찾기" onPress={() => alert('즐겨찾기 보기')} />
-        <CustomBlock title="알레르기" onPress={() => navigation.navigate("AllergenSetting")}  />
+        <CustomBlock hint="사용자의 알레르기 정보를 입력합니다." title="알레르기" onPress={() => navigation.navigate("AllergenSetting")}  />
       </View>
       <View style={styles.row}>
         <CustomBlock title="기록" onPress={() => alert('기록 보기')}  />

@@ -11,13 +11,11 @@ const BarcodeResult = ({route, navigation}) => {
     const { productInfo } = route.params;
     const { basicInfo, detailedInfo, nutritionInfo, additionalInfo } = productInfo;
     const [allergens, setAllergens] = useState(MyAllergen);
+    const [isAllergenLoaded, setIsAllergenLoaded] = React.useState(false);
+
+    let toastmessage = "바코드를 인식했습니다."
 
     useEffect(() => {
-        ToastAndroid.show(`바코드를 인식했습니다. 제품명 : ${basicInfo.name}`, ToastAndroid.SHORT);
-
-        // 제품 이름을 타이틀로 설정
-        navigation.setOptions({title: basicInfo.name});
-
         // Load allergen state from AsyncStorage
         const loadAllergen = async () => {
             try {
@@ -27,17 +25,21 @@ const BarcodeResult = ({route, navigation}) => {
                 }
             } catch (e) {
                 console.log(e);
+            } finally {
+                setIsAllergenLoaded(true);
             }
         };
         loadAllergen();
     }, []);
 
     useEffect(() => {
+        if (!isAllergenLoaded) return;
+
         const checkAllergen = async () => {
             if (nutritionInfo.allergens !== undefined) {
                 for (let allergen of nutritionInfo.allergens) {
                     if (allergens[allergen]) {
-                        ToastAndroid.show('이 제품에는 알레르기 유발 성분이 포함되어 있습니다', ToastAndroid.SHORT);
+                        toastmessage += "이 제품에는 알레르기 유발 성분이 포함되어 있습니다.";
                         break;
                     }
                 }
@@ -45,14 +47,17 @@ const BarcodeResult = ({route, navigation}) => {
             if (nutritionInfo.manufacturingAllergens !== undefined) {
                 for (let allergen of nutritionInfo.manufacturingAllergens) {
                     if (allergens[allergen]) {
-                        ToastAndroid.show('이 제품은 알레르기 유발 성분이 사용된 제조시설에서 생산되었습니다', ToastAndroid.SHORT);
+                        toastmessage += "이 제품은 알레르기 유발 성분이 사용된 제조시설에서 생산되었습니다.";
                         break;
                     }
                 }
             };
+            toastmessage += '제품명 : ' + basicInfo.name;
+            ToastAndroid.show(toastmessage, ToastAndroid.SHORT);
         }
+
         checkAllergen();
-    }, [allergens]);
+    }, [allergens, isAllergenLoaded]);
 
     function navInfo(screenName: string, info: any, title: string) {
         navigation.navigate(screenName, { info: info, title: title });
