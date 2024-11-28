@@ -1,16 +1,40 @@
-import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
-import { StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { translations } from '../translation'; 
+import Slider from '@react-native-community/slider';
 
-const BarcodeInfo = ({route, navigation}) => {
+const BarcodeInfo = ({ route, navigation }) => {
     const { info } = route.params;
+
+    // State to manage the font size
+    const [fontSize, setFontSize] = useState(20);
 
     return (
         <View style={styles.container}>
-            {Object.entries(info).map(([key, value], index) => (
-                <Text accessibilityLabel={`${route.params.title} ${Object.keys(info).length}개 중 ${index+1}번째, ${translations[key]} : ${String(value)}`} key={key} style={styles.text}>{translations[key]} : {String(value)}</Text>
-            ))}
+            <View style={styles.sliderContainer} importantForAccessibility='no-hide-descendants'>
+                <Text style={{color: 'black', padding: 20, fontSize: 30}}>글자 크기</Text>
+                <Slider
+                    style={styles.slider}
+                    minimumValue={20}
+                    maximumValue={60}
+                    minimumTrackTintColor='#000000'
+                    maximumTrackTintColor='#000000'
+                    step={1}
+                    value={fontSize}
+                    onValueChange={(value) => setFontSize(value)}
+                />
+            </View>
+            <ScrollView style={styles.textContainer}>
+                {Object.entries(info).map(([key, value], index) => (
+                    <Text
+                        accessibilityLabel={`${route.params.title} ${Object.keys(info).length}개 중 ${index + 1}번째, ${translations[key]} : ${String(value)}`}
+                        key={key}
+                        style={[styles.text, { fontSize }]}
+                    >
+                        {translations[key]} : {String(value)}
+                    </Text>
+                ))}
+            </ScrollView>
         </View>
     );
 };
@@ -22,10 +46,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
     },
+    textContainer: {
+        flex: 1,
+    },
+    sliderContainer: {
+        width: '80%',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
     text: {
         color: 'black',
-        fontSize: 20,
-        margin: 5,
+        margin: 10,
+    },
+    slider: {
+        width: '100%',
     },
 });
 

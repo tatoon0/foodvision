@@ -12,6 +12,8 @@ const BarcodeReader = ({navigation}) => {
   const [lastToastTime, setLastToastTime] = React.useState(0);
   const cooldown = 5000;
 
+  const testbutton = useRef(true);
+
   const options = {
     ignoreAndroidSystemSettings: true,
   };
@@ -62,52 +64,57 @@ const BarcodeReader = ({navigation}) => {
       <View accessible={true} style={{ alignItems:'center' }}>
         <Text style={{ fontSize:20, color:'black' }}>진동이 울리는 동안 카메라가 활성화됩니다. {'\n'}카메라에서 30cm정도에 바코드를 맞추면 인식이 원활합니다.</Text>
       </View>
-      {/* <View style={{
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        paddingVertical: 10,
-        }}>
-        <Button
-          title="test"
-          onPress={() => {
-            setModalVisible(true);
-          }}
-        />
-      </View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false);
-        }}
-      >
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <View style={{ backgroundColor: 'white', padding: 20, height: '50%' }}>
-            <FlatList
-              data={Object.keys(productData)}
-              keyExtractor={(item) => item}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={{ padding: 10 }}
-                  onPress={() => {
-                    setModalVisible(false);
-                    handleBarCodeRead(item);
-                }}>
-                  <Text style={styles.text}>{item}</Text>
-                </TouchableOpacity>
-              )}
-            >
-            </FlatList>
-            <Button
-              title="닫기"
-              onPress={() => {
-                setModalVisible(false);
-              }}
-            />
-          </View>
+      {/* 테스트용 버튼 */}
+      {testbutton.current ? (
+        <>
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          paddingVertical: 10,
+          }}>
+          <Button
+            title="test"
+            onPress={() => {
+              setModalVisible(true);
+            }}
+          />
         </View>
-      </Modal> */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(false);
+          }}
+        >
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{ backgroundColor: 'white', padding: 20, height: '50%' }}>
+              <FlatList
+                data={Object.keys(productData)}
+                keyExtractor={(item) => item}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    style={{ padding: 10 }}
+                    onPress={() => {
+                      setModalVisible(false);
+                      handleBarCodeRead(item);
+                  }}>
+                    <Text style={styles.text}>{item}</Text>
+                  </TouchableOpacity>
+                )}
+              >
+              </FlatList>
+              <Button
+                title="닫기"
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              />
+            </View>
+          </View>
+        </Modal>
+        </>
+      ) : null}
     </View>
   );
 };
