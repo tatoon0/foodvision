@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "492185976029",
+    "project_id": "foodvision-2a219",
+    "storage_bucket": "foodvision-2a219.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492185976029:android:88501110df719955e92f34",
+        "android_client_info": {
+          "package_name": "com.foodvision"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyVmOE0PdGq2GY2szUaCNHSDbmWw-cAeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492185976029:android:9df20e0a3047540fe92f34",
+        "android_client_info": {
+          "package_name": "com.foodvision.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyVmOE0PdGq2GY2szUaCNHSDbmWw-cAeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
