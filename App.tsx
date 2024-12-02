@@ -10,8 +10,12 @@ import OcrScreen from './screens/OCRScreen';
 import OCRResultScreen from './screens/OCRResultScreen';
 import MyPage from './screens/MyPage';
 import AllergenSetting from './screens/AllergenSetting';
+import CategoryScreen from './screens/CategoryScreen';
+import ProductListScreen from './screens/ProductListScreen';
+import ProductDetailScreen from './screens/ProductDetailScreen';
 import { theme } from './theme';
 import Navbar from './components/Navbar';
+
 
 type RootStackParamList = {
   Home: undefined;
@@ -41,6 +45,9 @@ const App = () => {
           <Stack.Screen name="OCRModeScreen" component={OCRModeScreen} />
           <Stack.Screen name="OcrScreen" component={OcrScreen} />
           <Stack.Screen name="OCRResultScreen" component={OCRResultScreen} />
+          <Stack.Screen name="Category" component={CategoryScreen} options={{ title: '카테고리' }} />
+          <Stack.Screen name="ProductList" component={ProductListScreen} options={{ title: '제품 목록' }} />
+          <Stack.Screen name="ProductDetail" component={ProductDetailScreen} options={{ title: '제품 상세' }} />
           <Stack.Screen name="MyPage" component={MyPage} />
           <Stack.Screen name="AllergenSetting" component={AllergenSetting} />
         </Stack.Navigator>

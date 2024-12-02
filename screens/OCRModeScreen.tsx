@@ -16,7 +16,7 @@ const OCRModeScreen = ({ navigation }) => {
             <View style={styles.buttonContainer}>
                 <CustomBlock
                     title="데이터베이스"
-                    onPress={() => navigation.navigate('OcrScreen')}
+                    onPress={() => navigation.navigate('Category')}
                 />
             </View>
         </View>
