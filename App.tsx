@@ -15,8 +15,9 @@ import ProductListScreen from './screens/ProductListScreen';
 import ProductDetailScreen from './screens/ProductDetailScreen';
 import { theme } from './theme';
 import Navbar from './components/Navbar';
-
-
+import ParsedDataScreen from './screens/ParsedDataScreen';
+import OCRCategoryScreen from './screens/OCRCategoryScreen';
+import ProductRegistrationScreen from './screens/ProductRegistrationScreen';
 type RootStackParamList = {
   Home: undefined;
   BarcodeReader: undefined;
@@ -48,6 +49,10 @@ const App = () => {
           <Stack.Screen name="Category" component={CategoryScreen} options={{ title: '카테고리' }} />
           <Stack.Screen name="ProductList" component={ProductListScreen} options={{ title: '제품 목록' }} />
           <Stack.Screen name="ProductDetail" component={ProductDetailScreen} options={{ title: '제품 상세' }} />
+          <Stack.Screen name="ParsedDataScreen" component={ParsedDataScreen} options={{ title: '제품 상세' }} />
+          <Stack.Screen name="OCRCategoryScreen" component={OCRCategoryScreen} options={{ title: '제품 상세' }} />
+          <Stack.Screen name="ProductRegistrationScreen" component={ProductRegistrationScreen} options={{ title: '제품 상세' }} />
+          
           <Stack.Screen name="MyPage" component={MyPage} />
           <Stack.Screen name="AllergenSetting" component={AllergenSetting} />
         </Stack.Navigator>
