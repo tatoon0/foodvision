@@ -12,41 +12,52 @@ const OCRCategoryScreen = ({ route }: { route: any }) => {
       .replace(/\n/g, ' ') // 줄바꿈 제거
       .trim();
   };
-
   const parseOCRData = (ocrResult: string, category: string): string => {
     const cleanedText = cleanOCRResult(ocrResult);
-    let match;
-
+  
     switch (category) {
       case 'ingredients': {
-        // 원재료명 추출
-        match = cleanedText.match(/원재료명\s([\s\S]*?)\s(?:밀|우유|대두|땅콩).*?함유/);
+        // '원재료명' 이후부터 '함유' 또는 알레르기 키워드 이전까지 추출
+        const match = cleanedText.match(/원재료명[|:.\s]*([\s\S]*?)(?=\s(?:밀|우유|대두|땅콩|함유|직사광선))/);
         return match && match[1] ? match[1].trim() : '정보를 찾을 수 없습니다.';
       }
       case 'allergy': {
-        // 알레르기 성분 추출
-        match = cleanedText.match(/(?:밀|우유|대두|땅콩).*?함유/);
-        return match ? match[0].trim() : '정보를 찾을 수 없습니다.';
-      }
-      case 'nutrition': {
-        // 영양정보 추출
-        const allergyMatch = cleanedText.match(/(?:밀|우유|대두|땅콩).*?함유/);
-        const allergyEndIndex = allergyMatch ? cleanedText.indexOf(allergyMatch[0]) : -1;
-        if (allergyEndIndex !== -1) {
-          const nutritionText = cleanedText.slice(0, allergyEndIndex);
-          return nutritionText ? nutritionText.trim() : '정보를 찾을 수 없습니다.';
+        // 알레르기 키워드와 '함유' 사이의 텍스트에서 키워드만 추출
+        const allergyKeywords = ['계란', '우유', '메밀', '땅콩', '대두', '밀', '잣', '호두', '게', '새우', '오징어', '고등어', '조개류', '복숭아', '토마토', '닭고기', '돼지고기', '쇠고기', '아황산류'];
+        const allergyRegex = new RegExp(`(${allergyKeywords.join('|')})`, 'gi');
+        
+        // '함유' 이전의 텍스트 추출
+        const match = cleanedText.match(/([\s\S]*?)\s*함유/);
+        console.log('Cleaned Text:', cleanedText); // Log the cleaned OCR result
+        console.log('Matched Text Before 함유:', match ? match[1] : 'No Match Found'); // Log the match before '함유'
+  
+        if (match && match[1]) {
+          // '함유' 이전 텍스트에서 알레르기 키워드만 추출
+          const allergyMatches = match[1].match(allergyRegex);
+          console.log('Allergy Matches:', allergyMatches); // Log the extracted allergy matches
+          return allergyMatches && allergyMatches.length > 0
+            ? Array.from(new Set(allergyMatches)).join(', ')
+            : '정보를 찾을 수 없습니다.';
         }
         return '정보를 찾을 수 없습니다.';
       }
+      case 'nutrition': {
+        // 영양정보 추출: 키워드와 숫자/단위를 포함한 텍스트 추출
+        const nutritionRegex = /(나트륨|탄수화물|당류|지방|트랜스지방|포화지방|콜레스테롤|단백질|총 내용량|칼로리)\s*[0-9]+(\s*[g|mg|kcal|%]?)/gi;
+        const matches = cleanedText.match(nutritionRegex);
+        return matches && matches.length > 0 ? matches.join(', ').trim() : '정보를 찾을 수 없습니다.';
+      }
       case 'storage': {
-        // 보관방법 추출
-        match = cleanedText.match(/직사광선.*?교환/);
-        return match ? match[0].trim() : '정보를 찾을 수 없습니다.';
+        // 보관방법 추출: '직사광선'부터 '진열', '교환', 또는 '보관'까지 추출
+        const storageRegex = /직사광선.*?(진열|교환|보관)/gi;
+        const match = cleanedText.match(storageRegex);
+        return match && match.length > 0 ? match.join(', ').trim() : '정보를 찾을 수 없습니다.';
       }
       default:
         return '정보를 찾을 수 없습니다.';
     }
   };
+  
 
   const categories = [
     { id: 'ingredients', title: '원재료명' },
